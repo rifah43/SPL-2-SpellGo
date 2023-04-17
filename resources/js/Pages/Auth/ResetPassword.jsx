@@ -39,7 +39,7 @@ export default function ResetPassword({ token, email }) {
                         type="email"
                         name="email"
                         value={data.email}
-                        className="inline-block align-baseline font-bold text-sm text-pink-600 hover:text-pink-800"
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
                     />
@@ -55,7 +55,7 @@ export default function ResetPassword({ token, email }) {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="inline-block align-baseline font-bold text-sm text-pink-600 hover:text-pink-800"
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
                         autoComplete="new-password"
                         isFocused={true}
                         onChange={(e) => setData('password', e.target.value)}
@@ -71,7 +71,7 @@ export default function ResetPassword({ token, email }) {
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="inline-block align-baseline font-bold text-sm text-pink-600 hover:text-pink-800"
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
                         autoComplete="new-password"
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                     />
