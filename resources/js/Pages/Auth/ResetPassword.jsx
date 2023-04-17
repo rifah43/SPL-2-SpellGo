@@ -39,7 +39,7 @@ export default function ResetPassword({ token, email }) {
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="inline-block align-baseline font-bold text-sm text-pink-600 hover:text-pink-800"
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
                     />
@@ -55,7 +55,7 @@ export default function ResetPassword({ token, email }) {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="inline-block align-baseline font-bold text-sm text-pink-600 hover:text-pink-800"
                         autoComplete="new-password"
                         isFocused={true}
                         onChange={(e) => setData('password', e.target.value)}
@@ -71,7 +71,7 @@ export default function ResetPassword({ token, email }) {
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        className="inline-block align-baseline font-bold text-sm text-pink-600 hover:text-pink-800"
                         autoComplete="new-password"
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                     />
@@ -80,7 +80,7 @@ export default function ResetPassword({ token, email }) {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton className="ml-4" disabled={processing}>
+                    <PrimaryButton className="px-4 py-2 rounded text-white bg-pink-500 hover:bg-pink-700 focus:outline-none focus:shadow-outline-pink focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" disabled={processing}>
                         Reset Password
                     </PrimaryButton>
                 </div>

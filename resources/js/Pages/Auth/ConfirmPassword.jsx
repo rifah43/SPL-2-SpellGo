@@ -40,7 +40,7 @@ export default function ConfirmPassword() {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="inline-block align-baseline font-bold text-sm text-pink-600 hover:text-pink-800"
                         isFocused={true}
                         onChange={(e) => setData('password', e.target.value)}
                     />
@@ -49,7 +49,7 @@ export default function ConfirmPassword() {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton className="ml-4" disabled={processing}>
+                    <PrimaryButton className="px-4 py-2 rounded text-white bg-pink-500 hover:bg-pink-700 focus:outline-none focus:shadow-outline-pink focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" disabled={processing}>
                         Confirm
                     </PrimaryButton>
                 </div>
