@@ -15,7 +15,6 @@ export default function Dashboard({ auth }) {
       <Head title="Dashboard" />
 
       <div className="relative">
-        {/* Sidebar */}
         <aside
           className={`bg-white border-pink-300 focus:ring-pink-500 focus:border-pink-500 w-64 min-h-screen ${
             showSidebar ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'
@@ -51,10 +50,8 @@ export default function Dashboard({ auth }) {
           </div>
         </aside>
 
-        {/* Main content */}
         <div className="flex-1" style={{ left: showSidebar ? '64px' : 0 }}>
           <div className="flex justify-start">
-            {/* Sidebar toggle button */}
             <button
               className="w-6 h-6 rounded-md text-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
               onClick={toggleSidebar}
