@@ -1,4 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Head } from '@inertiajs/react';
 
 export default function Dashboard({ auth }) {
@@ -8,13 +9,22 @@ export default function Dashboard({ auth }) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Admin Dashboard</h2>}
         >
             <Head/>
+            <div className="flex">
+                <aside className="bg-white border-pink-300 focus:ring-pink-500 focus:border-pink-500 w-64 min-h-screen">
+                    <div className="flex flex-col justify-between flex-1 mt-6">
+                        <div>
+                            <nav className="mt-2">
+                                <ResponsiveNavLink href={route('profile.edit')}>
+                                    Profile
+                                </ResponsiveNavLink>
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">You're logged in!</div>
+                                <ResponsiveNavLink method="post" href={route('logout')} as="button">
+                                    Log Out
+                                </ResponsiveNavLink>
+                            </nav>
+                        </div>
                     </div>
-                </div>
+                </aside>
             </div>
         </AuthenticatedLayout>
     );
