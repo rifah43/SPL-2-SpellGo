@@ -1,3 +1,4 @@
+<h1>SpellGo</h1>
 <p>Hi</p><br>
 
 <p>Thank you for registering with our Laravel project. We invite you to join our Discord chatroom using the following link:</p>
