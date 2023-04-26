@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Head } from '@inertiajs/react';
+import axios from 'axios';
 
 export default function Dashboard({ auth }) {
   const [showSidebar, setShowSidebar] = useState(false);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
+  };
+  const redirectToDiscord = () => {
+    window.open('https://discord.com/channels/1100703778585464852/1100703778585464855', '_blank');
   };
 
   return (
@@ -42,6 +46,10 @@ export default function Dashboard({ auth }) {
                   Profile
                 </ResponsiveNavLink>
 
+                <ResponsiveNavLink onClick={redirectToDiscord}>
+                  Join Discussion
+                </ResponsiveNavLink>
+
                 <ResponsiveNavLink method="post" href={route('logout')} as="button">
                   Log Out
                 </ResponsiveNavLink>
@@ -65,5 +73,6 @@ export default function Dashboard({ auth }) {
         </div>
       </div>
     </AuthenticatedLayout>
+    
   );
 }
