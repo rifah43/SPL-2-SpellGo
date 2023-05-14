@@ -13,6 +13,9 @@ export default function Dashboard({ auth }) {
   const redirectToDiscord = () => {
     window.open('https://discord.com/channels/1100703778585464852/1100703778585464855', '_blank');
   };
+  const handlePerformQuiz = () => {
+    window.location.href = '/perform-quiz';
+  };
 
   return (
     <AuthenticatedLayout user={auth.user}>
@@ -48,6 +51,10 @@ export default function Dashboard({ auth }) {
 
                 <ResponsiveNavLink onClick={redirectToDiscord}>
                   Join Discussion
+                </ResponsiveNavLink>
+
+                <ResponsiveNavLink onClick={handlePerformQuiz}>
+                  Perform Quiz
                 </ResponsiveNavLink>
 
                 <ResponsiveNavLink method="post" href={route('logout')} as="button">

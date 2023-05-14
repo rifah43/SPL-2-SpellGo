@@ -3,6 +3,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Head } from '@inertiajs/react';
 import axios from 'axios';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 
 export default function Dashboard({ auth }) {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -13,11 +15,13 @@ export default function Dashboard({ auth }) {
   const redirectToDiscord = () => {
     window.open('https://discord.com/channels/1100703778585464852/1100703778585464855', '_blank');
   };
+  const handleAdd = () => {
+    window.location.href = '/add-question';
+  };
 
   return (
     <AuthenticatedLayout user={auth.user}>
       <Head title="Admin Dashboard" />
-
       <div className="relative">
         <aside
           className={`bg-white border-pink-300 focus:ring-pink-500 focus:border-pink-500 w-64 min-h-screen ${
@@ -48,6 +52,10 @@ export default function Dashboard({ auth }) {
 
                 <ResponsiveNavLink onClick={redirectToDiscord}>
                   Join Discussion
+                </ResponsiveNavLink>
+
+                <ResponsiveNavLink onClick={handleAdd}>
+                  View Questions
                 </ResponsiveNavLink>
 
                 <ResponsiveNavLink method="post" href={route('logout')} as="button">

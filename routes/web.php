@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\QuizController;
+use App\Models\Question;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Discord\Discord;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
@@ -16,14 +18,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    $user = auth()->user();
-
-    if ($user->role === 'admin') {
-        return Inertia::render('AdminDashboard');
-    }
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['middleware' =>['auth']], function(){
+    Route::get('/dashboard','App\Http\Controllers\AdminController@index')->name('dashboard');
+    Route::get('/add-question','App\Http\Controllers\AdminController@addQuestion')->name('add-question');
+    Route::get('/add','App\Http\Controllers\AdminController@add')->name('add');
+    Route::get('/perform-quiz','App\Http\Controllers\QuizController@loadQuiz')->name('perform-quiz');
+    Route::post('/result','App\Http\Controllers\QuizController@evaluateQuiz')->name('evaluate');
+    Route::post('/add','App\Http\Controllers\AdminController@addQA')->name('add');
+    Route::post('/delete','App\Http\Controllers\AdminController@delete')->name('delete');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

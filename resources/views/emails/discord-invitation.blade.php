@@ -1,9 +1,10 @@
 <h1>SpellGo</h1>
-<p>Hi</p><br>
+<p>Hi!</p><br>
 
-<p>Thank you for registering with our Laravel project. We invite you to join our Discord chatroom using the following link:</p>
+<p>Thank you for registering! Click the following link to join our discord server:</p><br>
 
-<a href="https://discord.com/invite/DnWRqBR6MW">Join our Discord chatroom</a>
+<a href="https://discord.com/invite/GMyQaXY52e">Join our Discord chatroom</a>
+<p>Happy Learning!</p><br>
 
 <p>Best regards,</p>
-<p>The Laravel Project Team</p>
+<p>The SpellGo Team</p>

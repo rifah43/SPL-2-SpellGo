@@ -91,6 +91,14 @@ export default function Login({ status, canResetPassword }) {
                         Log in
                     </PrimaryButton>
                 </div>
+                <div className="flex left">
+                <Link
+                        href={route('register')}
+                        className="inline-block align-baseline font-bold text-sm text-pink-600 hover:text-pink-800"
+                    >
+                        New Here? Register!
+                    </Link>
+                </div>
             </form>
 
         </GuestLayout>
