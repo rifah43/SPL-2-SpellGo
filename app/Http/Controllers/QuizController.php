@@ -7,6 +7,9 @@ use Inertia\Inertia;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Quiz;
+use App\Models\Progress;
+use App\Models\Level;
+use App\Models\Reward;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\QuizResultMail;
 use PDF;
@@ -48,7 +51,6 @@ public function evaluateQuiz(Request $request)
         $is_correct = ($selected_answer && $selected_answer->is_correct);
 
         if ($is_correct) {
-            $score++;
             $correct++;
         }
 
@@ -56,10 +58,11 @@ public function evaluateQuiz(Request $request)
             'question' => $question->question,
             'selected_answer' => $selected_answer ? $selected_answer->answer : 'Not answered',
             'correct_answer' => $is_correct ? 'Correct' : 'Incorrect',
+            'correct_answer_text' => $question->answer->where('is_correct', true)->first()->answer,
         ];
     }
 
-    $score = $score + ((300 - $time) / 300 * $score);
+    $score = 10*(((300 - $time) / 300)/2 + ($correct/10)/2);
 
     $data = [
         'score' => $score,
@@ -71,6 +74,11 @@ public function evaluateQuiz(Request $request)
     Quiz::insert([
         'user_id' => $user->id,
         'time_needed' => $time,
+    ]);
+
+    $reward = Reward::create([
+        'user_id' => $user->id,
+        'points' => $score,
     ]);
 
     Mail::to($user->email)->send(new QuizResultMail($data, $results, $pdf));

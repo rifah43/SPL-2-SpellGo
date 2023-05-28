@@ -24,7 +24,7 @@ export default function Dashboard({ auth }) {
       <Head title="Admin Dashboard" />
       <div className="relative">
         <aside
-          className={`bg-white border-pink-300 focus:ring-pink-500 focus:border-pink-500 w-64 min-h-screen ${
+          className={`bg-yellow-100 border-brown-300 focus:ring-brown-500 focus:border-brown-500 w-64 min-h-screen ${
             showSidebar ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'
           } transition-all duration-300 fixed inset-y-0 left-0 z-30 overflow-y-auto`}
         >
@@ -32,7 +32,7 @@ export default function Dashboard({ auth }) {
             <div>
                 <div className="flex justify-end">
                 <button
-                    className="w-6 h-6 rounded-md text-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                    className="w-6 h-6 rounded-md text-brown-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-500"
                     onClick={toggleSidebar}
                 >
                     <span className="sr-only">Close sidebar</span>
@@ -47,7 +47,7 @@ export default function Dashboard({ auth }) {
                 </ResponsiveNavLink>
 
                 <ResponsiveNavLink href={route('profile.edit')}>
-                  Profile
+                  Edit Profile
                 </ResponsiveNavLink>
 
                 <ResponsiveNavLink onClick={redirectToDiscord}>
@@ -69,7 +69,7 @@ export default function Dashboard({ auth }) {
         <div className="flex-1" style={{ left: showSidebar ? '64px' : 0 }}>
           <div className="flex justify-start">
             <button
-              className="w-6 h-6 rounded-md text-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+              className="w-6 h-6 rounded-md text-brown-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-500"
               onClick={toggleSidebar}
             >
               <span className="sr-only">Open sidebar</span>

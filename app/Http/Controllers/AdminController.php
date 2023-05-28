@@ -8,7 +8,7 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use App\Http\Controllers\GameController;
 class AdminController extends Controller
 {
     public function index(){
@@ -17,7 +17,9 @@ class AdminController extends Controller
         if ($user->role === 'admin') {
             return Inertia::render('AdminDashboard');
         }
-        return Inertia::render('Dashboard');
+        else{
+            return Inertia::render('Dashboard');
+        }
     }
     public function addQuestion(){
         $user = auth()->user();

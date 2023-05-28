@@ -42,6 +42,10 @@ function AddQuestion() {
   };
 
   const handleRemoveOption = (index) => {
+    if (options.length <= 2) {
+      alert("Minimum two options should be present!");
+      return;
+    }
     setOptions(options.filter((o) => o.index !== index));
   };
 

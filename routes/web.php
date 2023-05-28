@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\QuizController;
 use App\Models\Question;
@@ -26,6 +27,8 @@ Route::group(['middleware' =>['auth']], function(){
     Route::post('/result','App\Http\Controllers\QuizController@evaluateQuiz')->name('evaluate');
     Route::post('/add','App\Http\Controllers\AdminController@addQA')->name('add');
     Route::post('/delete','App\Http\Controllers\AdminController@delete')->name('delete');
+    Route::get('/game-world','App\Http\Controllers\GameController@check')->name('game-world');
+    Route::get('/dashboard/progress','App\Http\Controllers\GameController@checkProgress')->name('progress');
 });
 
 Route::middleware('auth')->group(function () {
