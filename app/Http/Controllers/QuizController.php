@@ -65,7 +65,7 @@ public function evaluateQuiz(Request $request)
     $score = 10*(((300 - $time) / 300)/2 + ($correct/10)/2);
 
     $data = [
-        'score' => $score,
+        'score' => ceil($score),
         'correct' => $correct,
         'incorrect' => 10 - $correct,
     ];
@@ -78,7 +78,7 @@ public function evaluateQuiz(Request $request)
 
     $reward = Reward::create([
         'user_id' => $user->id,
-        'points' => $score,
+        'points' => ceil($score),
     ]);
 
     Mail::to($user->email)->send(new QuizResultMail($data, $results, $pdf));

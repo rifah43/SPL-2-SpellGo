@@ -28,7 +28,10 @@ Route::group(['middleware' =>['auth']], function(){
     Route::post('/add','App\Http\Controllers\AdminController@addQA')->name('add');
     Route::post('/delete','App\Http\Controllers\AdminController@delete')->name('delete');
     Route::get('/game-world','App\Http\Controllers\GameController@check')->name('game-world');
+    Route::post('/store', 'App\Http\Controllers\GameController@gameReward')->name('store');
     Route::get('/dashboard/progress','App\Http\Controllers\GameController@checkProgress')->name('progress');
+    Route::get('/customize','App\Http\Controllers\CustomizationController@check')->name('customize');
+    Route::post('/customize','App\Http\Controllers\CustomizationController@store')->name('customize');
 });
 
 Route::middleware('auth')->group(function () {

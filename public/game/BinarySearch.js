@@ -11,6 +11,9 @@ class BinarySearch extends Phaser.Scene {
         this.searchObj = "";
         this.steps = 0;
     }
+    init(data){
+        this.levelName=data.id;
+    }
     getOffset(numberOfpapers) {
         return config.width / 2 - ((50 * numberOfpapers + 138) / 2);
     }
@@ -125,6 +128,8 @@ class BinarySearch extends Phaser.Scene {
     }
     create() {
         this.createLibrary();
+        this.event=new UserEventHandler({ctx:this, fontColor:"#ffffff"})
+        this.event.createRestartBtn(160,10);
 
         this.left = this.createButton(config.width / 2 - 25, config.height - 80, "left-btn");
         this.right = this.createButton(this.left.x + this.left.displayWidth + 10, config.height - 80, "right-btn");
@@ -218,7 +223,7 @@ class BinarySearch extends Phaser.Scene {
     getMid() {
         return Math.floor((this.leftPoint + this.rightPoint) / 2) - 1;
     }
-    update() {
+    async update() {
         this.countdown.update();
         if (!this.midChosen) {
             this.countdown.pause();
@@ -248,6 +253,37 @@ class BinarySearch extends Phaser.Scene {
                                 this.scene.pause();
                                 // pause the timer, player won!!!!!!
                                 this.reward = new Reward({ ctx: this, maxScore: 1000 });
+                                this.score = this.reward.totalScore;
+        this.bestTime = this.reward.timeEfficiency;
+        this.levelId = this.levelName;
+  
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        // const storedCsrfToken = this.getStoredCsrfToken(); // Modify this line to call the function
+        console.log(csrfToken);
+        try {
+          const response = fetch('/store', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken
+            },
+            body: JSON.stringify({
+              score: this.score,
+              bestTime: this.bestTime,
+              levelId: this.levelId
+            })
+          });
+  
+          if (response.ok) {
+            const responseData = response.json();
+            console.log(responseData);
+          } else {
+            throw new Error('Error: ' + response.status);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+
                                 this.scene.start("gameSucceed", {
                                     reward: this.reward,
                                     todo: [
@@ -255,7 +291,8 @@ class BinarySearch extends Phaser.Scene {
                                         { text: "Take the recipe with you to the post office", speed: window.speeds.normal },
                                         { text: "...", speed: window.speeds.slow },
                                         { text: "See you until then!", speed: window.speeds.normal }
-                                    ]
+                                    ],
+                                    key:"binarySearch"
                                 })
                             }
                             this.halfChosen = false;

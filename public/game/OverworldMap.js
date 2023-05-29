@@ -151,28 +151,26 @@ window.OverworldMaps = {
     gameObjects: {
       hero: new Person({
         isPlayerControlled: true,
-        x: utils.withGrid(20),
-        y: utils.withGrid(78),
+        x: utils.withGrid(98),
+        y: utils.withGrid(62),
         viewSize:48
       }),
       npcA: new Person({
-        x: utils.withGrid(12),
-        y: utils.withGrid(80),
+        x: utils.withGrid(60),
+        y: utils.withGrid(78),
         src: "images/characters/people/npc1.png",
         viewSize:48,
         talking: [
           {
             events: [
-              { type: "textMessage", text: "I'm busy...", faceHero: "npcA" },
-              { type: "textMessage", text: "Go away!"},
-              { who: "hero", type: "walk",  direction: "up" },
+              { type: "textMessage", text: "Sort the stairs to go into the library", faceHero: "npcA" },
             ]
           }
         ]
       }),
       npcB: new Person({
-        x: introDone? utils.withGrid(37):utils.withGrid(34),
-        y: utils.withGrid(93),
+        x: utils.withGrid(97),
+        y: utils.withGrid(62),
         src: "images/characters/people/npc2.png",
         viewSize:48,
         introDone:"complete",
@@ -181,19 +179,15 @@ window.OverworldMaps = {
           {}:
           {
             events:[
-              {type:"textMessage",text:"Be prepared to test your courage",faceHero:"npcB"},
-              {type:"walk", who:"npcB",direction:"down"},
-              {type:"walk", who:"npcB",direction:"right"},
-              {type:"stand", who:"npcB",direction:"down"},
-              {type:"gate",what:"open",which:"villageGate"}
+              {type:"textMessage",text:"You have to reduce the size of your data. Nowadays much data cannot be transmittted into the portal.",faceHero:"npcB"},
             ]
           }
         ],
         
       }),
       villageGate:new GameObject({
-        x:utils.withGrid(34),
-        y:utils.withGrid(90),
+        x:utils.withGrid(86),
+        y:utils.withGrid(93),
         src: "images/VillageGate.png",
         shouldMount:"unmount",
         frameSize:64,
@@ -206,7 +200,7 @@ window.OverworldMaps = {
         collide:introDone?null:[{x:utils.withGrid(35),y:utils.withGrid(92)},{x:utils.withGrid(36),y:utils.withGrid(92)}]
       }),
       libraryGate: new GameObject({
-        x:utils.withGrid(19),
+        x:utils.withGrid(64),
         y:utils.withGrid(73),
         src:"images/libraryGate.png",
         shouldMount:"unmount",
@@ -219,8 +213,8 @@ window.OverworldMaps = {
         currentAnimation:"gate-close",
       }),
       greenhouseGate: new GameObject({
-        x:utils.withGrid(59.5),
-        y:utils.withGrid(55),
+        x:utils.withGrid(69.5),
+        y:utils.withGrid(46),
         src:"images/greenhouseGate.png",
         shouldMount:"unmount",
         frameSize:32,
@@ -231,91 +225,113 @@ window.OverworldMaps = {
         },
         currentAnimation:"gate-close",
       }),
-      bubbleSortLantern: utils.getLantern(14,80),
-      dijkstraLantern:utils.getLantern(52,75)
+      bubbleSortLantern: utils.getLantern(62,78),
+      huffmanLantern:utils.getLantern(99,62),
+      kmpLantern:utils.getLantern(93,35)
 
     },
-    collisions:{denotation:7946,coordinates:gameworldCollision},
+    collisions:{denotation:7946,coordinates:null},
     walls:[],
     cutsceneSpaces: {
-      [utils.asGridCoord(15,82)]: [
+      [utils.asGridCoord(63,80)]: [
         {
           events: [
             {type:"level",name:"bubbleSort"}
           ]
         }
       ],
-      [utils.asGridCoord(53,77)]: [
+      [utils.asGridCoord(100,64)]: [
         {
           events: [
-            {type:"level",name:"dijkstra"}
+            {type:"level",name:"huffman"}
           ]
         }
       ],
-      [utils.asGridCoord(20,75)]: [
+      [utils.asGridCoord(94,37)]: [
+        {
+          events: [
+            {type:"level",name:"kmp"}
+          ]
+        }
+      ],
+      [utils.asGridCoord(65,75)]: [
         {
           events: [
             { type: "changeRoom", map: "library" }
           ]
         }
       ],
-      [utils.asGridCoord(60,56)]: [
+      [utils.asGridCoord(66,75)]: [
+        {
+          events: [
+            { type: "changeRoom", map: "library" }
+          ]
+        }
+      ],
+      [utils.asGridCoord(70,47)]: [
         {
           events: [
             { type: "changeRoom", map: "greenhouse" }
           ]
         }
       ],
-      [utils.asGridCoord(55,75)]: [
+      [utils.asGridCoord(97,62)]: [
         {
           events: [
             { type: "changeRoom", map: "postOffice" }
           ]
         }
       ],
-      [utils.asGridCoord(60,57)]:[
+      [utils.asGridCoord(96,62)]: [
+        {
+          events: [
+            { type: "changeRoom", map: "postOffice" }
+          ]
+        }
+      ],
+      [utils.asGridCoord(70,48)]:[
         {
           events:[
             {type:"gate", what:"open",which:"greenhouseGate"}
           ]
         }
       ],
-      [utils.asGridCoord(20,76)]:[
+      [utils.asGridCoord(65,76)]:[
         {
           events:[
             {type:"gate", what:"open",which:"libraryGate"}
           ]
         }
       ],
-      [utils.asGridCoord(21,76)]:[
+      [utils.asGridCoord(66,76)]:[
         {
           events:[
             {type:"gate", what:"open",which:"libraryGate"}
           ]
         }
       ],
-      [utils.asGridCoord(20,77)]:[
+      [utils.asGridCoord(64,76)]:[
         {
           events:[
             {type:"gate", what:"close",which:"libraryGate"}
           ]
         }
       ],
-      [utils.asGridCoord(21,77)]:[
+      [utils.asGridCoord(67,76)]:[
         {
           events:[
             {type:"gate", what:"close",which:"libraryGate"}
           ]
         }
       ],
-      [utils.asGridCoord(19,76)]:[
+      [utils.asGridCoord(65,77)]:[
         {
           events:[
             {type:"gate", what:"close",which:"libraryGate"}
           ]
         }
       ],
-      [utils.asGridCoord(22,76)]:[
+      [utils.asGridCoord(66,77)]:[
         {
           events:[
             {type:"gate", what:"close",which:"libraryGate"}

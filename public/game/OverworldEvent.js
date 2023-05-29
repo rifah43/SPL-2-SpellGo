@@ -92,8 +92,8 @@ class OverworldEvent {
   }
   level(resolve){
     // game.canvas.style.backgroundColor = 'black';
-    game.scene.add(this.event.name,levels[this.event.name]);
-    game.scene.start(this.event.name);
+    game.scene.add(this.event.name,levels[this.event.name].class);
+    game.scene.start(this.event.name,{id:levels[this.event.name].id});
     resolve();
 
   }
@@ -105,8 +105,28 @@ class OverworldEvent {
 
 }
 const levels={
-  "bubbleSort":BubbleSort,
-  "binarySearch":BinarySearch,
-  "dijkstra":Dijkstra,
-  "mergeSort":MergeSort,
+  "bubbleSort":{
+    class:BubbleSort,
+    id:1
+  },
+  "binarySearch":{
+    class: BinarySearch,
+    id:2
+  },
+  "huffman":{
+    class:Huffman1,
+    id:3
+  },
+  "dijkstra":{
+    class:Dijkstra,
+    id:4
+  },
+  "mergeSort":{
+    class:MergeSort,
+    id:5
+  },
+  "kmp":{
+    class:KMP,
+    id:6
+  }
 }

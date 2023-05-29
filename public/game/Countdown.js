@@ -5,12 +5,14 @@ class CountdownController {
 		this.duration = config.duration
 		this.callback = config.callback||=()=>{}
 		this.remainingTime=this.duration;
+		this.fontColor=config.fontColor||'#ffffff';
 	}
 
 	start() {
 		this.stop()
 		this.label = this.ctx.add.text(10, 10, "" + this.duration, {
             fontFamily:"CustomFont",
+			color:this.fontColor,
             fontSize:20
         });
 

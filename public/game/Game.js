@@ -65,6 +65,10 @@ function preload(){
         frameWidth:160,
         frameHeight:160
     });
+    this.load.spritesheet("slimeLime","images/slimeLime.png",{
+        frameWidth:160,
+        frameHeight:160
+    });
     this.load.bitmapFont("pixelFont", "/images/font/font.png", "images/font/font.xml");
     this.load.bitmapFont("pixelFont_black", "/images/font/font-black.png", "images/font/font.xml");
     this.load.image("wizard", "images/wizard.jpg");

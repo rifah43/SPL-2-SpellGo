@@ -10,6 +10,9 @@ class MergeSort extends Phaser.Scene {
         this.divideDone=false;
         this.mergeDone=false;
     }
+    init(data){
+        this.levelName=data.id;
+    }
     createArray(){
         const num=Math.floor(Math.random()*(7-5+1))+5;
         for(let i=0;i<num;i++){
@@ -87,20 +90,52 @@ class MergeSort extends Phaser.Scene {
         this.createTexts();
         this.add.image(config.width/2-40,config.height - this.startFrom+this.nodeHeight-10,'timber');
 
-        
+        this.event=new UserEventHandler({ctx:this, fontSize:"15px"})
+        this.event.createRestartBtn(160,10);
         this.startSorting();
     }
     async startSorting(){
         let currentNode=this.make_tree({x:config.width/2,y:config.height - this.startFrom},'root',0,this.array.length-1);
         await this.mergeSort(0, this.array.length-1,currentNode,0);
         this.reward = new Reward({ ctx: this, maxScore: 4000 });
+        this.score = this.reward.totalScore;
+        this.bestTime = this.reward.timeEfficiency;
+        this.levelId = this.levelName;
+  
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        // const storedCsrfToken = this.getStoredCsrfToken(); // Modify this line to call the function
+        console.log(csrfToken);
+        try {
+          const response = fetch('/store', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken
+            },
+            body: JSON.stringify({
+              score: this.score,
+              bestTime: this.bestTime,
+              levelId: this.levelId
+            })
+          });
+  
+          if (response.ok) {
+            const responseData = response.json();
+            console.log(responseData);
+          } else {
+            throw new Error('Error: ' + response.status);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
         this.scene.start("gameSucceed", {
             reward: this.reward,
             todo: [
                 { text: "NEXT TASK: ", speed: window.speeds.slow },
                 { text: "Help out in the slime shop", speed: window.speeds.normal },
                 { text: "...", speed: window.speeds.slow }
-            ]
+            ],
+            key:"mergeSort"
         })
     }
     async mergeSort(begin, end, currentNode, currHeight) {

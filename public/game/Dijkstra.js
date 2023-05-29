@@ -53,7 +53,7 @@ class Dijkstra extends Phaser.Scene{
         ];
         this.costs=[0];
         this.cutScenePlaying=false;
-
+        
         this.bridgeMap={
             "0,1":{
                 cost:2,
@@ -108,6 +108,9 @@ class Dijkstra extends Phaser.Scene{
         this.steps=22;
         this.adjacentChosen=false;
         this.cityDefeated=0;
+    }
+    init(data){
+        this.levelName=data.id;
     }
     
     createMap(){
@@ -414,6 +417,8 @@ class Dijkstra extends Phaser.Scene{
                 this.scene.start("game_over")
             }
         });
+        this.event=new UserEventHandler({ctx:this, fontSize:"15px"})
+        this.event.createRestartBtn(160,10);
 
         (new MessageBox({ctx:this})).startTyping(window.guidance.dijkstra.minSrc);
         
@@ -423,13 +428,44 @@ class Dijkstra extends Phaser.Scene{
             this.scene.pause();
             // pause the timer, player won!!!!!!
             this.reward = new Reward({ ctx: this, maxScore: 3000 });
+            this.score = this.reward.totalScore;
+        this.bestTime = this.reward.timeEfficiency;
+        this.levelId = this.levelName;
+  
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        // const storedCsrfToken = this.getStoredCsrfToken(); // Modify this line to call the function
+        console.log(csrfToken);
+        try {
+          const response = fetch('/store', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken
+            },
+            body: JSON.stringify({
+              score: this.score,
+              bestTime: this.bestTime,
+              levelId: this.levelId
+            })
+          });
+  
+          if (response.ok) {
+            const responseData = response.json();
+            console.log(responseData);
+          } else {
+            throw new Error('Error: ' + response.status);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
             this.scene.start("gameSucceed", {
                 reward: this.reward,
                 todo: [
                     { text: "NEXT TASK: ", speed: window.speeds.slow },
-                    { text: "MergeSort", speed: window.speeds.normal },
+                    { text: "Go into the garden", speed: window.speeds.normal },
                     { text: "...", speed: window.speeds.slow }
-                ]
+                ],
+                key:"dijkstra"
             })            
         }
         this.countdown.update();

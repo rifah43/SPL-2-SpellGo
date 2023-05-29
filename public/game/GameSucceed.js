@@ -9,6 +9,8 @@ class GameSucceed extends Phaser.Scene{
     init(data){
         this.coinAmount=data.reward.totalScore;
         this.todo=data.todo;
+        this.scene.remove(data.key);
+        console.log(data.key);
     }
     preload(){
         this.load.spritesheet("coin","images/coin.png",{
@@ -64,6 +66,7 @@ class GameSucceed extends Phaser.Scene{
         this.exit=new Button({ctx:this, x:10,y:10,btnName:"EXIT",fontColor:"#ffffff",btnColor:0x000001}).createButtons();
         this.exit.getByName('btn').on("pointerdown",()=>{
             this.scene.setVisible(false, 'gameSucceed');
+
         })
     }
     

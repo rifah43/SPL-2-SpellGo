@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>
+        window.csrfToken = "{{ csrf_token() }}";
+    </script>
     <title>Game World</title>
     <style>
         body{

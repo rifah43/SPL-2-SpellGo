@@ -5,6 +5,9 @@ class BubbleSort extends Phaser.Scene {
         this.restarted=false;
     }
    
+    init(data){
+        this.levelName=data.id;
+    }
     createStair() {
         this.stairs = [];
         this.numberOfStairs = Math.floor(Math.random() * (7 - 5 + 1)) + 5;

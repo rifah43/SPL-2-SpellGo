@@ -12,12 +12,15 @@ class Reward{
         const remainingLives=this.ctx.rewind.remainingLives;
         const remainingTime=this.ctx.countdown.remainingTime;
 
-        const timeEfficiency=remainingTime/totalTime;
+        this.timeEfficiency=remainingTime/totalTime;
         const livesEfficiency=remainingLives/totalLives;
 
-        const scoreEfficiency=(timeEfficiency*0.6)+(livesEfficiency*0.4);
+        const scoreEfficiency=(this.timeEfficiency*0.6)+(livesEfficiency*0.4);
         const totalScore=Math.ceil(scoreEfficiency*this.maxScore);
         
         return totalScore;
     }
+    getTime() {
+        return this.timeEfficiency;
+      }
 }
